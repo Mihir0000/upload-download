@@ -21,13 +21,67 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 125px;
     opacity: 0;
     cursor: pointer;
 }
 
 .dropzone.active {
     border-color: #fff;
+}
+.files {
+    width: 500px;
+}
+
+.uploadFile {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    /* width: 300px; */
+}
+
+.btnbtn {
+    display: flex;
+    height: 40px;
+    align-self: end;
+    padding-left: 20px;
+}
+
+.playPause {
+    border-radius: 10px;
+    border: 1px solid yellow;
+    margin-right: 3px;
+    color: blue;
+    padding: 0 15px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.5s;
+}
+.playPause:hover {
+    background-color: yellow;
+}
+.cancel {
+    border-radius: 10px;
+    border: 1px solid red;
+    color: red;
+    padding: 0 15px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.5s;
+    overflow: hidden;
+}
+.cancel:hover {
+    background-color: orange;
+    border-color: orange;
+}
+.fa-sharp{
+  transition: all 0.5s;
+}
+.cancel:hover .fa-sharp,
+.playPause:hover .fa-sharp {
+    transform: scale(1.2);
+    align-items: center;
+    align-self: center;
 }
 
 .file {
@@ -40,6 +94,7 @@
     padding: 10px;
     position: relative;
     overflow: hidden;
+    width: 100%;
 }
 
 .file .progress {

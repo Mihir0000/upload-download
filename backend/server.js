@@ -11,7 +11,7 @@ app.use('/uploads', express.static('uploads'));
 
 app.post('/upload', (req, res) => {
     const { name, currentChunkIndex, totalChunks } = req.query;
-    console.log(name);
+    // console.log(name);
     const firstChunks = parseInt(currentChunkIndex) === 0;
     const lastChunks =
         parseInt(currentChunkIndex) === parseInt(totalChunks) - 1;

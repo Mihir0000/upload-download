@@ -111,7 +111,8 @@ const Upload = () => {
                 <div className="files">
                     {files.map((file, index) => {
                         let progress = 0;
-                        const isLastChunks = Math.ceil(file.size / chunkSize)-1;
+                        const isLastChunks =
+                            Math.ceil(file.size / chunkSize) - 1;
                         if (file.name && isLastChunks === currentChunkIndex) {
                             progress = 100;
                         } else {
@@ -125,28 +126,37 @@ const Upload = () => {
                                 progress = 0;
                             }
                         }
-                        console.log(progress);
                         return (
-                            <div key={index} className="file">
-                                <a
-                                    rel="noreferrer"
-                                    href={
-                                        'http://localhost:4000/uploads/' +
-                                        file.name
-                                    }
-                                    target="_blank"
-                                >
-                                    <div className="name">{file.name}</div>
-                                    <div
-                                        className={
-                                            'progress ' +
-                                            (progress === 100 ? 'done' : '')
+                            <div key={index} className="uploadFile">
+                                <div className="file">
+                                    <a
+                                        rel="noreferrer"
+                                        href={
+                                            'http://localhost:4000/uploads/' +
+                                            file.name
                                         }
-                                        style={{ width: progress + '%' }}
+                                        target="_blank"
                                     >
-                                        {progress} %
-                                    </div>
-                                </a>
+                                        <div className="name">{file.name}</div>
+                                        <div
+                                            className={
+                                                'progress ' +
+                                                (progress === 100 ? 'done' : '')
+                                            }
+                                            style={{ width: progress + '%' }}
+                                        >
+                                            {progress} %
+                                        </div>
+                                    </a>
+                                </div>
+                                <div className="btnbtn">
+                                    <button className="playPause">
+                                        <i className="fa-sharp fa-solid fa-pause" />
+                                    </button>
+                                    <button className="cancel">
+                                        <i className="fa-sharp fa-solid fa-xmark" />
+                                    </button>
+                                </div>
                             </div>
                         );
                     })}
