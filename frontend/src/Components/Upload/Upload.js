@@ -58,7 +58,7 @@ const Upload = () => {
             const isLastChunks =
                 currentChunkIndex === Math.ceil(fileSize / chunkSize) - 1;
             if (isLastChunks) {
-                file.finalFileName = response.data.finalFileName;
+                // file.name = response.data.name;
                 setLastUploadedFileIndex(currentFileIndex);
                 setCurrentChunkIndex(null);
             } else {
@@ -111,7 +111,8 @@ const Upload = () => {
                 <div className="files">
                     {files.map((file, index) => {
                         let progress = 0;
-                        if (file.finalFileName) {
+                        const isLastChunks = Math.ceil(file.size / chunkSize)-1;
+                        if (file.name && isLastChunks === currentChunkIndex) {
                             progress = 100;
                         } else {
                             const uploading = index === currentFileIndex;
@@ -124,13 +125,14 @@ const Upload = () => {
                                 progress = 0;
                             }
                         }
+                        console.log(progress);
                         return (
                             <div key={index} className="file">
                                 <a
                                     rel="noreferrer"
                                     href={
                                         'http://localhost:4000/uploads/' +
-                                        file.finalFileName
+                                        file.name
                                     }
                                     target="_blank"
                                 >
