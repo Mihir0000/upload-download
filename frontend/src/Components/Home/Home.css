@@ -1,0 +1,41 @@
+.form-container {
+    width: 400px;
+    margin: auto;
+    padding: 40px;
+}
+
+.inputFiled {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+.text {
+    text-align: center;
+}
+
+.inputFiled input {
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
+    border: 1px solid blue;
+}
+
+form{
+  display: flex;
+  flex-direction: column;
+}
+.proceedBtn{
+  width: 160px;
+  height: 35px;
+  align-self: center;
+  border-radius: 5px;
+  border: none;
+  transition: all 0.5s;
+  font-size: medium;
+  cursor: pointer;
+}
+.proceedBtn:hover{
+  background-color: rgba(128, 128, 128, 0.404);
+  color: white;
+  
+}

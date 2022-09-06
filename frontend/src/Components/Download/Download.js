@@ -18,7 +18,7 @@ const Download = () => {
             <div className="download-container">
                 <div className="container-text">
                     <h4 className="down-text">Want to Download?</h4>
-                    <Link rel="noreferrer" to="/">
+                    <Link rel="noreferrer" to="/upload">
                         <button className="uploadBtn">Upload?</button>
                     </Link>
                 </div>

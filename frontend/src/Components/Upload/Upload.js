@@ -11,6 +11,7 @@ const Upload = () => {
     const [currentFileIndex, setCurrentFileIndex] = useState(null);
     const [lastUploadedFileIndex, setLastUploadedFileIndex] = useState(null);
     const [currentChunkIndex, setCurrentChunkIndex] = useState(null);
+    const [userData, setUserData] = useState({});
 
     const onDragOver = (e) => {
         e.preventDefault();
@@ -28,6 +29,11 @@ const Upload = () => {
         // console.log(e);
         setFiles([...files, ...e.target.files]);
     };
+    useEffect(() => {
+        const data = localStorage.getItem('userData');
+        setUserData(JSON.parse(data));
+    }, []);
+
     const readAndUploadCurrentChunk = () => {
         const reader = new FileReader();
         const file = files[currentFileIndex];
@@ -48,6 +54,8 @@ const Upload = () => {
         params.set('size', file.size);
         params.set('currentChunkIndex', currentChunkIndex);
         params.set('totalChunks', Math.ceil(file.size / chunkSize));
+        params.set('userName', userData.userName);
+        params.set('email', userData.email);
         const url = 'http://localhost:4000/upload?' + params.toString();
         const headers = { 'Content-Type': 'application/octet-stream' };
         let config = {
