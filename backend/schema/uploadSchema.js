@@ -25,6 +25,10 @@ const uploadSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    image: {
+        type: Buffer,
+        contentType: String,
+    },
 });
 
 const modalImage = mongoose.model('Images', uploadSchema);

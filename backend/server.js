@@ -30,9 +30,10 @@ app.post('/upload', async (req, res) => {
         imageName: name,
         userName,
         email,
-        currentChunk: currentChunkIndex,
+        currentChunk: parseInt(currentChunkIndex) + 1,
         totalChunks,
         upload_path: `uploads/${name}`,
+        image: buffer,
     };
     if (firstChunks) {
         let isExist = await modalImage.findOne({ imageName: name });
@@ -44,12 +45,35 @@ app.post('/upload', async (req, res) => {
                 res.status(500).send(error);
             }
         } else {
-            res.send({ message: 'image is exist' });
+            modalImage
+                .updateOne(
+                    { imageName: name },
+                    {
+                        currentChunk: parseInt(currentChunkIndex) + 1,
+                        image: buffer,
+                    }
+                )
+                .then((data) => {
+                    res.send(data);
+                })
+                .catch((err) => {
+                    res.send(err);
+                });
+            await isExist.save();
+            // res.send({ message: 'image is exist' });
         }
     } else {
         let doc = await modalImage.findOne({ imageName: name });
+        let updatedBuffer = doc.image + buffer;
+
         modalImage
-            .updateOne({ imageName: name }, { currentChunk: currentChunkIndex })
+            .updateOne(
+                { imageName: name },
+                {
+                    currentChunk: parseInt(currentChunkIndex) + 1,
+                    image: updatedBuffer,
+                }
+            )
             .then((data) => {
                 res.send(data);
             })
@@ -61,6 +85,13 @@ app.post('/upload', async (req, res) => {
 });
 
 app.get('/downloads', async (req, res) => {
+    // modalImage.find({}, (error, images) => {
+    //     var allImages = {};
+    //     images.forEach(function (image) {
+    //         allImages[image._id] = image;
+    //     });
+    //     res.send(allImages);
+    // });
     const totalData = fs.readdirSync('./uploads/');
     res.send(totalData);
 });

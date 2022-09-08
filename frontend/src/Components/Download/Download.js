@@ -24,7 +24,7 @@ const Download = () => {
                 </div>
                 <div className="allItem">
                     {downloadData &&
-                        downloadData.map((item, index) => {
+                        downloadData?.map((item, index) => {
                             return (
                                 <div key={index}>
                                     <DownloadCard item={item} />
